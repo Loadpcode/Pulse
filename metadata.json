@@ -1,6 +1,0 @@
-{
-  "name": "XRay Pulse",
-  "description": "VPN-клиент на базе ядра Xray-core с поддержкой VLESS, VMess, Hysteria2 и Trojan в стиле Material Design 3.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}
