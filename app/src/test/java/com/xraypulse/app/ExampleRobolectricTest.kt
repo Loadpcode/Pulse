@@ -51,7 +51,7 @@ class ExampleRobolectricTest {
   }
 
   @Test
-  @Config(sdk = [36], qualifiers = "w1280dp-h800dp-land")
+  @Config(sdk = [34], qualifiers = "w1280dp-h800dp-land")
   fun `main activity launches cleanly in tablet landscape layout`() {
     val controller = Robolectric.buildActivity(MainActivity::class.java).setup()
     shadowOf(Looper.getMainLooper()).idle()
@@ -60,7 +60,7 @@ class ExampleRobolectricTest {
   }
 
   @Test
-  @Config(sdk = [36], qualifiers = "w960dp-h540dp-television-notouch")
+  @Config(sdk = [34], qualifiers = "w960dp-h540dp-television-notouch")
   fun `main activity detects TV mode and launches cleanly`() {
     val controller = Robolectric.buildActivity(MainActivity::class.java).setup()
     shadowOf(Looper.getMainLooper()).idle()
