@@ -36,19 +36,25 @@ jobs:
         with:
           path: debug.keystore
           key: debug-keystore-v1
+        continue-on-error: true
 
       - name: Generate debug keystore if missing
-        if: steps.keystore.outputs.cache-hit != 'true'
         run: |
-          keytool -genkeypair -v -keystore debug.keystore \
-            -storepass android -alias androiddebugkey -keypass android \
-            -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=Android Debug,O=Android,C=US"
+          if [ ! -f debug.keystore ]; then
+            keytool -genkeypair -v -keystore debug.keystore \
+              -storepass android -alias androiddebugkey -keypass android \
+              -keyalg RSA -keysize 2048 -validity 10000 \
+              -dname "CN=Android Debug,O=Android,C=US"
+          fi
 
       - name: Build and test
         run: |
-          set -o pipefail
-          gradle assembleDebug testDebugUnitTest --stacktrace 2>&1 | tee build.log
+          if gradle assembleDebug testDebugUnitTest --stacktrace 2>&1 | tee build.log; then
+            echo "BUILD_FAILED=false" >> "$GITHUB_ENV"
+          else
+            echo "BUILD_FAILED=true" >> "$GITHUB_ENV"
+            exit 1
+          fi
 
       - name: Upload APK to release
         if: always()
@@ -56,9 +62,14 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           FILE=$(ls app/build/outputs/apk/debug/*.apk 2>/dev/null | head -n1)
-          if [ -n "${FILE}" ]; then
+          if [ -n "${FILE}" ] && [ "${{ env.BUILD_FAILED }}" != "true" ]; then
             gh release view debug-apk >/dev/null 2>&1 || gh release create debug-apk --title "Debug APK (latest)" --notes "Автоматическая debug-сборка последнего коммита main"
-            gh release upload debug-apk "${FILE}" --clobber
+            if gh release upload debug-apk "${FILE}" --clobber; then
+              echo "PUBLISH_FAILED=false" >> "$GITHUB_ENV"
+            else
+              echo "PUBLISH_FAILED=true" >> "$GITHUB_ENV"
+              exit 1
+            fi
           fi
 
       - name: Report run result to issues
@@ -69,22 +80,17 @@ jobs:
             const fs = require('fs');
             let log = '';
             try { log = fs.readFileSync('build.log', 'utf8').split('\n').slice(-120).join('\n'); } catch (e) {}
-            let status = '';
-            try {
-              const jobs = await github.rest.actions.listJobsForWorkflowRun({ owner: context.repo.owner, repo: context.repo.repo, run_id: context.runId });
-              status = jobs.data.jobs.map(j => {
-                const bad = j.steps.filter(s => s.conclusion === 'failure' || s.conclusion === 'cancelled').map(s => s.name);
-                return j.name + ': ' + j.conclusion + (bad.length ? ' (упавшие шаги: ' + bad.join(', ') + ')' : '');
-              }).join('\n');
-            } catch (e) { status = 'не удалось получить статусы: ' + e.message; }
-            const failed = /failure|cancelled|timed.out/i.test(status) && !/build > Report run result/.test('') ;
-            const isFailed = (await (async () => /: (failure|cancelled)/.test(status))());
+            const buildFailed = '${{ env.BUILD_FAILED }}' === 'true';
+            const publishFailed = '${{ env.PUBLISH_FAILED }}' === 'true';
+            const isFailed = buildFailed || publishFailed;
+            const verdict = buildFailed ? 'сборка/тесты упали' : (publishFailed ? 'сборка прошла, публикация APK упала' : 'всё успешно');
             await github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
               title: (isFailed ? 'CI failure on ' : 'CI success on ') + context.sha.slice(0, 8),
-              body: 'Run: ' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo
+              body: 'Итог: ' + verdict
+                + '\nRun: ' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo
                 + '/actions/runs/' + context.runId
-                + '\n\nСтатусы шагов:\n' + status
+                + '\nRelease: ' + context.serverUrl + '/' + context.repo.owner + '/' + context.repo.repo + '/releases/tag/debug-apk'
                 + '\n\nХвост лога Gradle:\n\n```\n' + log + '\n```'
             });
