@@ -22,7 +22,7 @@ import org.robolectric.annotation.Config
 import java.nio.charset.StandardCharsets
 
 @RunWith(RobolectricTestRunner::class)
-@Config(sdk = [36])
+@Config(sdk = [34])
 class VpnCoreConfigTests {
 
     @Test
