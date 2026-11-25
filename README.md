@@ -1,4 +1,4 @@
-XRay Pulse
+#XRay Pulse
 
 XRay Pulse — Android-приложение для удобного управления VPN-подключением на базе Xray-core.
 
