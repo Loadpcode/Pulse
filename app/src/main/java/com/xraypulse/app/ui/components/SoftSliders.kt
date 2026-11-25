@@ -5,6 +5,7 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.snap
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -180,7 +181,7 @@ fun <T> SoftSlidingSelector(
     val animatedPosState = animateFloatAsState(
         targetValue = targetPos,
         animationSpec = if (isDragging) {
-            spring(stiffness = Spring.StiffnessHigh)
+            snap()
         } else {
             spring(
                 dampingRatio = 0.78f,
@@ -336,7 +337,7 @@ fun <T> SoftSlidingSelector(
                 .fillMaxSize()
                 .drawWithContent {
                     val pillScale = (1f + 0.065f * currentPillStretchFactor()).coerceAtLeast(0.96f)
-                    val baseLeft = (animatedPosState.value * slotWidthPx).coerceIn(0f, maxPillLeftPx)
+                    val baseLeft = (animatedPosState.value * slotWidthPx).coerceIn(0f, maxPillLeftPx).roundToInt().toFloat()
                     val center = baseLeft + slotWidthPx * 0.5f
                     val halfW = slotWidthPx * 0.5f * pillScale
                     clipRect(
@@ -487,10 +488,14 @@ fun SoftValueSlider(
     var lastSnappedMagnet by remember { mutableStateOf<Float?>(null) }
     val clamped = fraction.coerceIn(0f, 1f)
 
+    // While dragging, the thumb tracks the raw finger fraction 1:1 (no spring lag,
+    // no magnet-boundary ping-pong). Magnet snapping applies to the emitted value only.
+    var dragRawFraction by remember { mutableFloatStateOf(clamped) }
+
     val animatedFractionState = animateFloatAsState(
-        targetValue = clamped,
+        targetValue = if (isDragging) dragRawFraction else clamped,
         animationSpec = if (isDragging) {
-            spring(stiffness = Spring.StiffnessHigh)
+            snap()
         } else {
             tween(durationMillis = 200, easing = FastOutSlowInEasing)
         },
@@ -619,12 +624,14 @@ fun SoftValueSlider(
                             lastSnappedMagnet = null
                             dragX = startOffset.x
                             val next = ((dragX - thumbSizePx / 2f) / usablePx).coerceIn(0f, 1f)
+                            dragRawFraction = next
                             emitWithMagnet(next)
                         },
                         onHorizontalDrag = { change, dragAmount ->
                             change.consume()
                             dragX += dragAmount
                             val next = ((dragX - thumbSizePx / 2f) / usablePx).coerceIn(0f, 1f)
+                            dragRawFraction = next
                             emitWithMagnet(next)
                         },
                         onDragEnd = {
@@ -878,14 +885,19 @@ fun SoftRangeSlider(
     val clampedStart = startFraction.coerceIn(0f, 1f)
     val clampedEnd = endFraction.coerceIn(clampedStart, 1f)
 
+    // While a thumb is being dragged it tracks the raw finger fraction 1:1 (no spring lag,
+    // no magnet-boundary ping-pong). Magnet snapping applies to the emitted value only.
+    var dragRawStart by remember { mutableFloatStateOf(clampedStart) }
+    var dragRawEnd by remember { mutableFloatStateOf(clampedEnd) }
+
     val animStartState = animateFloatAsState(
-        targetValue = clampedStart,
-        animationSpec = if (activeThumb == 1) spring(stiffness = Spring.StiffnessHigh) else tween(200),
+        targetValue = if (activeThumb == 1) dragRawStart else clampedStart,
+        animationSpec = if (activeThumb == 1) snap() else tween(200),
         label = "range_start"
     )
     val animEndState = animateFloatAsState(
-        targetValue = clampedEnd,
-        animationSpec = if (activeThumb == 2) spring(stiffness = Spring.StiffnessHigh) else tween(200),
+        targetValue = if (activeThumb == 2) dragRawEnd else clampedEnd,
+        animationSpec = if (activeThumb == 2) snap() else tween(200),
         label = "range_end"
     )
 
@@ -1049,6 +1061,8 @@ fun SoftRangeSlider(
                                 activeThumb = if (distStart < distEnd || (distStart == distEnd && tapFrac < s)) 1 else 2
                                 localStart = s
                                 localEnd = e
+                                dragRawStart = s
+                                dragRawEnd = e
                             },
                             onHorizontalDrag = { change, dragAmount ->
                                 change.consume()
@@ -1061,12 +1075,14 @@ fun SoftRangeSlider(
                                     }
                                     lastSnappedStart = hitAnchor
                                     localStart = snapped.coerceAtMost(localEnd)
+                                    dragRawStart = rawFrac.coerceAtMost(localEnd)
                                 } else if (activeThumb == 2) {
                                     if (hitAnchor != null && hitAnchor != lastSnappedEnd) {
                                         haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                                     }
                                     lastSnappedEnd = hitAnchor
                                     localEnd = snapped.coerceAtLeast(localStart)
+                                    dragRawEnd = rawFrac.coerceAtLeast(localStart)
                                 }
                                 latestOnRangeChange(localStart, localEnd)
                             },
