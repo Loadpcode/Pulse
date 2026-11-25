@@ -61,21 +61,37 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          FILE=$(ls app/build/outputs/apk/debug/*.apk 2>/dev/null | head -n1)
-          if [ -n "${FILE}" ] && [ "${{ env.BUILD_FAILED }}" != "true" ]; then
-            gh release view debug-apk >/dev/null 2>&1 || gh release create debug-apk --title "Debug APK (latest)" --notes "Автоматическая debug-сборка последнего коммита main"
-            BASE=$(basename "${FILE}")
-          for attempt in 1 2 3 4; do
-            if gh release upload debug-apk "${FILE}" --clobber; then
-              echo "PUBLISH_FAILED=false" >> "$GITHUB_ENV"
-              exit 0
+          if [ "${{ env.BUILD_FAILED }}" != "true" ]; then
+            REL=$(ls app/build/outputs/apk/release/*.apk 2>/dev/null | head -n1)
+            DBG=$(ls app/build/outputs/apk/debug/*.apk 2>/dev/null | head -n1)
+            upload_with_retry() {
+              local tag="$1" file="$2"
+              local base
+              base=$(basename "$file")
+              for attempt in 1 2 3 4; do
+                if gh release upload "$tag" "$file" --clobber; then
+                  return 0
+                fi
+                gh release delete-asset "$tag" "$base" -y >/dev/null 2>&1 || true
+                sleep 15
+              done
+              return 1
+            }
+            PUBLISHED_ALL=true
+            if [ -n "${REL}" ]; then
+              gh release view release-apk >/dev/null 2>&1 || gh release create release-apk --title "Release APK (latest)" --notes "Автоматическая release-сборка (R8 + shrink) последнего коммита main"
+              upload_with_retry release-apk "${REL}" || PUBLISHED_ALL=false
             fi
-            # HTTP 500 can leave a broken partial asset: delete it before retry
-            gh release delete-asset debug-apk "${BASE}" -y >/dev/null 2>&1 || true
-            sleep 15
-          done
-          echo "PUBLISH_FAILED=true" >> "$GITHUB_ENV"
-          exit 1
+            if [ -n "${DBG}" ]; then
+              gh release view debug-apk >/dev/null 2>&1 || gh release create debug-apk --title "Debug APK (latest)" --notes "Автоматическая debug-сборка последнего коммита main"
+              upload_with_retry debug-apk "${DBG}" || PUBLISHED_ALL=false
+            fi
+            if [ "${PUBLISHED_ALL}" = "true" ]; then
+              echo "PUBLISH_FAILED=false" >> "$GITHUB_ENV"
+            else
+              echo "PUBLISH_FAILED=true" >> "$GITHUB_ENV"
+              exit 1
+            fi
           fi
 
       - name: Report run result to issues
