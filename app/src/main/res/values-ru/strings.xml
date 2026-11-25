@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">XRay Pulse</string>
+
+    <!-- Connect Screen -->
+    <string name="status_disconnected">Отключено</string>
+    <string name="status_connecting">Подключение…</string>
+    <string name="status_connected">Защищено</string>
+    <string name="status_disconnecting">Отключение…</string>
+    <string name="status_error">Ошибка подключения</string>
+    <string name="action_connect">Подключить</string>
+    <string name="action_disconnect">Отключить</string>
+    <string name="action_test_delay">Пинг</string>
+    <string name="label_no_server_selected">Сервер не выбран</string>
+    <string name="menu_import_clipboard">Буфер обмена</string>
+    <string name="menu_manual_input">Ручной ввод</string>
+    <string name="menu_qr">QR</string>
+    <string name="hint_manual_link_input">vless://, vmess://, trojan://, hy2://, https://…</string>
+    <string name="action_refresh">Обновить</string>
+    <string name="action_toggle_list">Скрыть или показать список</string>
+    <string name="label_servers_card_title">Подписка</string>
+    <string name="empty_servers_short">Серверы пока не добавлены</string>
+    <string name="label_usage_unlimited">Без лимита трафика</string>
+    <string name="action_rename">Переименовать</string>
+    <string name="label_expire_until">До %1$s</string>
+    <string name="dialog_rename_sub_title">Переименовать подписку</string>
+    <string name="hint_sub_name">Название подписки</string>
+    <string name="label_servers_count">Серверов: %1$d</string>
+    <string name="action_ping_servers">Пинг всех</string>
+    <string name="error_vpn_permission_denied">Системное разрешение VPN отклонено.</string>
+    <string name="error_no_profile_selected">Сначала выберите или добавьте сервер.</string>
+    <string name="notif_channel_name">Статус VPN-туннеля</string>
+    <string name="notif_channel_desc">Постоянное уведомление при активном VPN-туннеле XRay Pulse</string>
+    <string name="notif_connected_title">XRay Pulse • Подключено</string>
+    <string name="notif_connecting_title">XRay Pulse • Подключение…</string>
+
+    <!-- Import & Common Actions -->
+    <string name="action_delete">Удалить</string>
+    <string name="action_share">Поделиться</string>
+    <string name="action_share_server">Поделиться сервером</string>
+    <string name="action_share_subscription">Поделиться подпиской</string>
+    <string name="action_share_servers">Поделиться серверами</string>
+    <string name="share_chooser_title">Поделиться через</string>
+    <string name="msg_clipboard_empty">Буфер обмена пуст</string>
+    <string name="msg_imported_count">Импортировано серверов: %1$d</string>
+    <string name="msg_import_failed">Не найдены ссылки VLESS, VMess, Trojan или Hysteria2</string>
+    <string name="msg_sub_added">Подписка обновлена (серверов: %1$d)</string>
+    <string name="msg_sub_error">Ошибка обновления подписки: %1$s</string>
+    <string name="action_cancel">Отмена</string>
+    <string name="action_save">Сохранить</string>
+    <string name="action_add">Добавить</string>
+
+    <!-- QR Scanner -->
+    <string name="qr_title">Сканер QR-кода</string>
+    <string name="qr_hint">Наведите камеру на QR-код VLESS, VMess, Trojan или Hysteria2</string>
+    <string name="qr_permission_title">Нужен доступ к камере</string>
+    <string name="qr_permission_desc">Разрешите доступ к камере, чтобы сканировать QR-коды серверов в XRay Pulse.</string>
+    <string name="action_grant_camera">Разрешить камеру</string>
+    <string name="qr_no_camera_title">Камера не обнаружена</string>
+    <string name="qr_no_camera_desc">На этом устройстве нет камеры. Вернитесь назад, чтобы вставить ссылку из буфера обмена или ввести её вручную.</string>
+    <string name="action_go_back">Назад</string>
+
+    <!-- App Routing -->
+    <string name="search_apps_hint">Поиск приложений…</string>
+    <string name="label_show_system_apps">Системные приложения</string>
+
+    <!-- Settings & Diagnostics -->
+    <string name="settings_title">Настройки</string>
+    <string name="label_language">Язык интерфейса</string>
+    <string name="lang_system">Системный</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_en">English</string>
+    <string name="label_theme">Тема оформления</string>
+    <string name="theme_dark">Тёмная</string>
+    <string name="theme_system">Системная</string>
+    <string name="theme_light">Светлая</string>
+    <string name="label_dynamic_color">Динамические цвета Material You</string>
+    <string name="label_dynamic_color_desc">Использовать палитру обоев Material 3 на Android 12+</string>
+    <string name="label_enable_mux">Мультиплексирование (Mux)</string>
+    <string name="label_enable_mux_desc">Объединять TCP-потоки (авто-пропуск для Vision/Hysteria2)</string>
+    <string name="label_enable_fragment">Фрагментация TLS</string>
+    <string name="label_enable_fragment_desc">Разбивать TLS ClientHello для обхода DPI</string>
+    <string name="label_xray_logs">Журнал Xray (Logs)</string>
+    <string name="label_xray_logs_desc">Поток логов ядра и событий VPN-сервиса</string>
+    <string name="label_config_preview">Предпросмотр Xray JSON</string>
+    <string name="label_config_preview_desc">Итоговый JSON-конфиг активного профиля</string>
+    <string name="action_copy">Копировать</string>
+    <string name="action_clear">Очистить</string>
+    <string name="msg_copied">Скопировано в буфер</string>
+
+    <!-- Settings Hub & Sub-screens -->
+    <string name="settings_item_app_title">Настройки приложения</string>
+    <string name="settings_item_app_desc">Тема, визуал, язык, прокрутка названий</string>
+    <string name="settings_item_traffic_title">Настройки трафика</string>
+    <string name="settings_item_traffic_desc">Фрагментирование, Mux, LAN, MTU, IPv6, маршрутизация, автообновление</string>
+    <string name="settings_item_diagnostics_title">Диагностика</string>
+    <string name="settings_item_diagnostics_desc">Журнал Xray и JSON-конфигурация</string>
+    <string name="label_marquee_titles">Прокрутка длинных названий</string>
+    <string name="label_marquee_titles_desc">Бегущая строка для названий подписок и серверов, если они не помещаются</string>
+    <string name="label_fragment_packets">Пакеты (packets)</string>
+    <string name="label_fragment_length">Длина (length)</string>
+    <string name="label_fragment_interval">Интервал (мс)</string>
+    <string name="label_mux_concurrency">Потоки Mux (concurrency)</string>
+    <string name="label_mux_xudp">XUDP потоки</string>
+    <string name="label_lan_mode">Работа с LAN</string>
+    <string name="label_lan_bypass">Обходить</string>
+    <string name="label_lan_proxy">Не обходить</string>
+    <string name="label_mtu_size">Размер сетевого пакета (MTU)</string>
+    <string name="label_prefer_ipv6">Предпочитать IPv6</string>
+    <string name="label_prefer_ipv6_desc">Использовать IPv6 для DNS и туннеля</string>
+    <string name="label_app_routing">Маршрутизация</string>
+    <string name="routing_mode_only_selected">Обход</string>
+    <string name="routing_mode_ignore_selected">Игнор</string>
+    <string name="routing_mode_only_desc">Выбранные приложения проксируются через VPN</string>
+    <string name="routing_mode_ignore_desc">Проксируются все приложения, кроме выбранных</string>
+    <string name="label_auto_update_sub">Автообновление подписки</string>
+    <string name="label_auto_update_sub_desc">Автоматически обновлять серверы при входе или по времени</string>
+    <string name="label_auto_update_on_launch">Обновление при входе</string>
+    <string name="label_auto_update_on_launch_desc">Обновлять подписки при открытии приложения и переносить таймер</string>
+    <string name="label_auto_update_by_schedule">Обновление по времени</string>
+    <string name="label_auto_update_by_schedule_desc">Автоматически обновлять подписки через заданный интервал</string>
+    <string name="label_auto_update_choose_mode">Включите обновление при входе или по времени</string>
+    <string name="label_auto_update_interval">Интервал обновления (часы)</string>
+    <string name="label_hours_short">%1$d ч</string>
+    <string name="label_app_routing_summary_off">Выключена</string>
+    <string name="label_app_routing_summary_count">%1$s · %2$d прил.</string>
+    <string name="label_app_routing_enable_hint">Включите маршрутизацию выше, чтобы выбрать приложения</string>
+    <string name="empty_apps_search">Приложения не найдены</string>
+
+    <!-- Visual Settings & Sliders -->
+    <string name="settings_item_visual_title">Визуал</string>
+    <string name="settings_item_visual_desc">Цвета темы и фона, вращение и форма кнопки Material 3</string>
+    <string name="label_follow_device_theme">Следовать теме устройства</string>
+    <string name="label_follow_device_theme_desc">Палитра Material You из обоев (или стандартная тема)</string>
+    <string name="label_custom_theme_color">Свой цвет темы</string>
+    <string name="label_custom_bg_color">Свой цвет фона</string>
+    <string name="label_default_color">Стандартный</string>
+    <string name="label_custom_color_pick">Свой</string>
+    <string name="dialog_pick_color_title">Выбор цвета</string>
+    <string name="label_color_hex">HEX (#RRGGBB)</string>
+    <string name="label_connecting_rotation_speed">Вращение при подключении</string>
+    <string name="label_connected_rotation_speed">Вращение в подключённом состоянии</string>
+    <string name="label_deg_per_sec">%1$d °/с</string>
+    <string name="label_button_shape">Форма кнопки (Material Design 3)</string>
+    <string name="shape_square">Квадрат</string>
+    <string name="shape_rounded_square">Скруглённый</string>
+    <string name="shape_circle">Круг</string>
+    <string name="shape_squircle">Сквиркл</string>
+    <string name="shape_cookie_4">4-Печенье</string>
+    <string name="shape_cookie_6">6-Печенье</string>
+    <string name="shape_cookie_9">9-Печенье</string>
+    <string name="shape_arch">Арка</string>
+    <string name="shape_pill">Капсула</string>
+    <string name="shape_oval">Овал</string>
+    <string name="label_shape_formula_params">Параметры формулы</string>
+    <string name="action_reset_shape_params">Сбросить</string>
+    <string name="label_circle_no_rotation">Для круга вращение отключено</string>
+    <string name="param_square_side">Сторона (s)</string>
+    <string name="param_corner_radius">Радиус угла (r)</string>
+    <string name="param_radius">Радиус (R)</string>
+    <string name="param_squircle_power">Степень (n)</string>
+    <string name="param_cookie_depth">Глубина выемок (a)</string>
+    <string name="param_arch_width">Ширина (w)</string>
+    <string name="param_arch_height">Прямая часть (h)</string>
+    <string name="param_pill_width">Ширина (w)</string>
+    <string name="param_pill_height">Высота (h)</string>
+    <string name="param_oval_a">Горизонт. полуось (a)</string>
+    <string name="param_oval_b">Вертик. полуось (b)</string>
+    <string name="label_visual_preview">Предпросмотр</string>
+    <string name="label_visual_preview_connecting">Подключение</string>
+    <string name="label_visual_preview_connected">Подключено</string>
+    <string name="dialog_edit_value_title">Введите значение</string>
+    <string name="label_valid_range">Диапазон: %1$d – %2$d</string>
+    <string name="label_range_start">От</string>
+    <string name="label_range_end">До</string>
+    <string name="action_logs">Логи</string>
+
+    <!-- Quick Settings Tile -->
+    <string name="qs_tile_label">XRay Pulse</string>
+    <string name="qs_tile_connected">Подключено</string>
+    <string name="qs_tile_no_server">Нет сервера</string>
+</resources>

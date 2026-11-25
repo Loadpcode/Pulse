@@ -1,0 +1,181 @@
+<resources>
+    <string name="app_name">XRay Pulse</string>
+
+    <!-- Connect Screen -->
+    <string name="status_disconnected">Disconnected</string>
+    <string name="status_connecting">Connecting…</string>
+    <string name="status_connected">Protected</string>
+    <string name="status_disconnecting">Disconnecting…</string>
+    <string name="status_error">Connection Error</string>
+    <string name="action_connect">Connect</string>
+    <string name="action_disconnect">Disconnect</string>
+    <string name="action_test_delay">Test Delay</string>
+    <string name="label_no_server_selected">No server configured</string>
+    <string name="menu_import_clipboard">Clipboard</string>
+    <string name="menu_manual_input">Manual Input</string>
+    <string name="menu_qr">QR</string>
+    <string name="hint_manual_link_input">vless://, vmess://, trojan://, hy2://, https://…</string>
+    <string name="action_refresh">Refresh</string>
+    <string name="action_toggle_list">Toggle server list</string>
+    <string name="label_servers_card_title">Subscription</string>
+    <string name="empty_servers_short">No servers added yet</string>
+    <string name="label_usage_unlimited">No traffic limit</string>
+    <string name="action_rename">Rename</string>
+    <string name="label_expire_until">Until %1$s</string>
+    <string name="dialog_rename_sub_title">Rename Subscription</string>
+    <string name="hint_sub_name">Subscription name</string>
+    <string name="label_servers_count">Servers: %1$d</string>
+    <string name="action_ping_servers">Ping all</string>
+    <string name="error_vpn_permission_denied">VPN permission was denied by system.</string>
+    <string name="error_no_profile_selected">Select or add a server profile first.</string>
+    <string name="notif_channel_name">VPN Tunnel Status</string>
+    <string name="notif_channel_desc">Persistent notification while XRay Pulse VPN tunnel is active</string>
+    <string name="notif_connected_title">XRay Pulse • Connected</string>
+    <string name="notif_connecting_title">XRay Pulse • Connecting…</string>
+
+    <!-- Import & Common Actions -->
+    <string name="action_delete">Delete</string>
+    <string name="action_share">Share</string>
+    <string name="action_share_server">Share server</string>
+    <string name="action_share_subscription">Share subscription</string>
+    <string name="action_share_servers">Share servers</string>
+    <string name="share_chooser_title">Share via</string>
+    <string name="msg_clipboard_empty">Clipboard is empty</string>
+    <string name="msg_imported_count">Imported %1$d server(s)</string>
+    <string name="msg_import_failed">No supported VLESS, VMess, Trojan, or Hysteria2 URI found</string>
+    <string name="msg_sub_added">Subscription synced (%1$d servers)</string>
+    <string name="msg_sub_error">Subscription update failed: %1$s</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_save">Save</string>
+    <string name="action_add">Add</string>
+
+    <!-- QR Scanner -->
+    <string name="qr_title">Scan Server QR</string>
+    <string name="qr_hint">Point your camera at a VLESS, VMess, Trojan, or Hysteria2 QR code</string>
+    <string name="qr_permission_title">Camera access required</string>
+    <string name="qr_permission_desc">Allow camera access to scan server QR codes directly into XRay Pulse.</string>
+    <string name="action_grant_camera">Grant Camera Permission</string>
+    <string name="qr_no_camera_title">No camera detected</string>
+    <string name="qr_no_camera_desc">This device has no built-in camera. Return to the main screen to paste a link from the clipboard or enter it manually.</string>
+    <string name="action_go_back">Back</string>
+
+    <!-- App Routing -->
+    <string name="search_apps_hint">Search installed apps…</string>
+    <string name="label_show_system_apps">Show system apps</string>
+
+    <!-- Settings & Diagnostics -->
+    <string name="settings_title">Settings</string>
+    <string name="label_language">Language</string>
+    <string name="lang_system">System</string>
+    <string name="lang_ru">Русский</string>
+    <string name="lang_en">English</string>
+    <string name="label_theme">Theme</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="label_dynamic_color">Material You Dynamic Color</string>
+    <string name="label_dynamic_color_desc">Use wallpaper-derived Material 3 palette on Android 12+</string>
+    <string name="label_enable_mux">Enable Mux Concurrency</string>
+    <string name="label_enable_mux_desc">Multiplex TCP streams (automatically skipped for Vision/Hysteria2)</string>
+    <string name="label_enable_fragment">TLS Fragmentation</string>
+    <string name="label_enable_fragment_desc">Split TLS ClientHello packets to improve DPI resilience</string>
+    <string name="label_xray_logs">Xray Runtime Logs</string>
+    <string name="label_xray_logs_desc">Live core output and tunnel lifecycle events</string>
+    <string name="label_config_preview">Generated Xray JSON Config</string>
+    <string name="label_config_preview_desc">Inspect the exact outbound &amp; routing JSON</string>
+    <string name="action_copy">Copy</string>
+    <string name="action_clear">Clear</string>
+    <string name="msg_copied">Copied to clipboard</string>
+
+    <!-- Settings Hub & Sub-screens -->
+    <string name="settings_item_app_title">App Settings</string>
+    <string name="settings_item_app_desc">Theme, visual style, language, and long title scrolling</string>
+    <string name="settings_item_traffic_title">Traffic Settings</string>
+    <string name="settings_item_traffic_desc">Fragment, Mux, LAN, MTU, IPv6, routing, auto-update</string>
+    <string name="settings_item_diagnostics_title">Diagnostics</string>
+    <string name="settings_item_diagnostics_desc">Xray logs and generated JSON config</string>
+    <string name="label_marquee_titles">Scroll long titles</string>
+    <string name="label_marquee_titles_desc">Automatically scroll subscription and server names that do not fit</string>
+    <string name="label_fragment_packets">Packets</string>
+    <string name="label_fragment_length">Length (bytes)</string>
+    <string name="label_fragment_interval">Interval (ms)</string>
+    <string name="label_mux_concurrency">Mux concurrency</string>
+    <string name="label_mux_xudp">XUDP concurrency</string>
+    <string name="label_lan_mode">LAN handling</string>
+    <string name="label_lan_bypass">Bypass LAN</string>
+    <string name="label_lan_proxy">Proxy LAN</string>
+    <string name="label_mtu_size">Network packet size (MTU)</string>
+    <string name="label_prefer_ipv6">Prefer IPv6</string>
+    <string name="label_prefer_ipv6_desc">Enable IPv6 DNS resolution and tunnel routing</string>
+    <string name="label_app_routing">App routing</string>
+    <string name="routing_mode_only_selected">Bypass (proxy selected)</string>
+    <string name="routing_mode_ignore_selected">Ignore (proxy all except)</string>
+    <string name="routing_mode_only_desc">Only checked apps go through the VPN tunnel</string>
+    <string name="routing_mode_ignore_desc">All apps go through VPN except checked ones</string>
+    <string name="label_auto_update_sub">Auto-update subscriptions</string>
+    <string name="label_auto_update_sub_desc">Automatically refresh subscription servers on launch or schedule</string>
+    <string name="label_auto_update_on_launch">Update on app launch</string>
+    <string name="label_auto_update_on_launch_desc">Refresh subscriptions when opening the app and shift the schedule timer</string>
+    <string name="label_auto_update_by_schedule">Scheduled update</string>
+    <string name="label_auto_update_by_schedule_desc">Automatically refresh subscriptions at the chosen interval</string>
+    <string name="label_auto_update_choose_mode">Enable update on launch or scheduled update</string>
+    <string name="label_auto_update_interval">Update interval (hours)</string>
+    <string name="label_hours_short">%1$d h</string>
+    <string name="label_app_routing_summary_off">Disabled</string>
+    <string name="label_app_routing_summary_count">%1$s · %2$d apps</string>
+    <string name="label_app_routing_enable_hint">Enable routing above to choose apps</string>
+    <string name="empty_apps_search">No matching apps</string>
+
+    <!-- Visual Settings & Sliders -->
+    <string name="settings_item_visual_title">Visual</string>
+    <string name="settings_item_visual_desc">Theme colors, background, button rotation &amp; Material 3 shapes</string>
+    <string name="label_follow_device_theme">Follow device theme</string>
+    <string name="label_follow_device_theme_desc">Use Material You wallpaper colors (or standard theme if unsupported)</string>
+    <string name="label_custom_theme_color">Theme accent color</string>
+    <string name="label_custom_bg_color">Background color</string>
+    <string name="label_default_color">Default</string>
+    <string name="label_custom_color_pick">Custom</string>
+    <string name="dialog_pick_color_title">Pick Color</string>
+    <string name="label_color_hex">HEX (#RRGGBB)</string>
+    <string name="label_connecting_rotation_speed">Connecting rotation speed</string>
+    <string name="label_connected_rotation_speed">Connected rotation speed</string>
+    <string name="label_deg_per_sec">%1$d °/s</string>
+    <string name="label_button_shape">Button shape (Material Design 3)</string>
+    <string name="shape_square">Square</string>
+    <string name="shape_rounded_square">Rounded</string>
+    <string name="shape_circle">Circle</string>
+    <string name="shape_squircle">Squircle</string>
+    <string name="shape_cookie_4">4-Cookie</string>
+    <string name="shape_cookie_6">6-Cookie</string>
+    <string name="shape_cookie_9">9-Cookie</string>
+    <string name="shape_arch">Arch</string>
+    <string name="shape_pill">Pill</string>
+    <string name="shape_oval">Oval</string>
+    <string name="label_shape_formula_params">Formula parameters</string>
+    <string name="action_reset_shape_params">Reset</string>
+    <string name="label_circle_no_rotation">Rotation disabled for Circle</string>
+    <string name="param_square_side">Side (s)</string>
+    <string name="param_corner_radius">Corner radius (r)</string>
+    <string name="param_radius">Radius (R)</string>
+    <string name="param_squircle_power">Power (n)</string>
+    <string name="param_cookie_depth">Notch depth (a)</string>
+    <string name="param_arch_width">Width (w)</string>
+    <string name="param_arch_height">Straight height (h)</string>
+    <string name="param_pill_width">Width (w)</string>
+    <string name="param_pill_height">Height (h)</string>
+    <string name="param_oval_a">Horizontal semi-axis (a)</string>
+    <string name="param_oval_b">Vertical semi-axis (b)</string>
+    <string name="label_visual_preview">Live preview</string>
+    <string name="label_visual_preview_connecting">Connecting</string>
+    <string name="label_visual_preview_connected">Connected</string>
+    <string name="dialog_edit_value_title">Enter value</string>
+    <string name="label_valid_range">Range: %1$d – %2$d</string>
+    <string name="label_range_start">From</string>
+    <string name="label_range_end">To</string>
+    <string name="action_logs">Logs</string>
+
+    <!-- Quick Settings Tile -->
+    <string name="qs_tile_label">XRay Pulse</string>
+    <string name="qs_tile_connected">Connected</string>
+    <string name="qs_tile_no_server">No server</string>
+</resources>

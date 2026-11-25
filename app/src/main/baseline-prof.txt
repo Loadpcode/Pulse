@@ -1,0 +1,51 @@
+# Baseline Profile for XRay Pulse
+# Precompiles cold-start, Compose UI rendering, Room/DataStore, and URI parser hot paths.
+
+# Application & Container Startup
+Lcom/example/XrayPulseApp;
+Lcom/example/AppContainer;
+HSPLcom/example/XrayPulseApp;->**(**)**
+HSPLcom/example/AppContainer;->**(**)**
+
+# MainActivity & Root Compose Shell
+Lcom/example/MainActivity;
+Lcom/example/MainActivityKt;
+HSPLcom/example/MainActivity**->**(**)**
+
+# Core Domain Models & Navigation
+Lcom/example/model/**;
+HSPLcom/example/model/**->**(**)**
+Lcom/example/ui/navigation/**;
+HSPLcom/example/ui/navigation/**->**(**)**
+
+# DataStore Preferences & Room Persistence
+Lcom/example/data/local/**;
+HSPLcom/example/data/local/**->**(**)**
+Lcom/example/data/repository/**;
+HSPLcom/example/data/repository/**->**(**)**
+
+# Share URI Parsing & Xray Config Generation
+Lcom/example/data/parser/ShareUriParser;
+HSPLcom/example/data/parser/ShareUriParser**->**(**)**
+Lcom/example/data/xray/**;
+HPLcom/example/data/xray/**->**(**)**
+
+# VPN Session & Core Bridge
+Lcom/example/vpn/VpnSessionManager;
+Lcom/example/vpn/VpnLaunchStore;
+Lcom/example/vpn/VpnPingClient;
+HSPLcom/example/vpn/VpnSessionManager**->**(**)**
+HPLcom/example/vpn/**->**(**)**
+
+# Theme, Adaptive UI & Connect Hero Shapes
+Lcom/example/ui/theme/**;
+HSPLcom/example/ui/theme/**->**(**)**
+Lcom/example/ui/components/**;
+HSPLcom/example/ui/components/**->**(**)**
+
+# ViewModels & Screens
+Lcom/example/ui/viewmodel/**;
+HSPLcom/example/ui/viewmodel/**->**(**)**
+Lcom/example/ui/screens/ConnectScreenKt;
+HSPLcom/example/ui/screens/ConnectScreenKt**->**(**)**
+HPLcom/example/ui/screens/**->**(**)**
