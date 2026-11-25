@@ -9,11 +9,11 @@ plugins {
 }
 
 android {
-  namespace = "com.example"
+  namespace = "com.xraypulse.app"
   compileSdk { version = release(36) { minorApiLevel = 1 } }
 
   defaultConfig {
-    applicationId = "com.example.xraypulse"
+    applicationId = "com.xraypulse.app.xraypulse"
     minSdk = 24
     targetSdk = 36
     versionCode = 1

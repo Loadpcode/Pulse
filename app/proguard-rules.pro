@@ -19,12 +19,12 @@
 -keepclasseswithmembers class * {
     @kotlinx.serialization.Serializable <methods>;
 }
--keep,includedescriptorclasses class com.example.ui.navigation.** { *; }
--keep,includedescriptorclasses class com.example.model.** { *; }
+-keep,includedescriptorclasses class com.xraypulse.app.ui.navigation.** { *; }
+-keep,includedescriptorclasses class com.xraypulse.app.model.** { *; }
 
 # Room database & entities
 -keep class * extends androidx.room.RoomDatabase { *; }
--keep class com.example.data.local.** { *; }
+-keep class com.xraypulse.app.data.local.** { *; }
 
 # Strip verbose debug logs in release builds
 -assumenosideeffects class android.util.Log {
